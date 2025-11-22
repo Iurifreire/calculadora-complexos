@@ -7,6 +7,8 @@ function App() {
 
   const [expressao, setExpressao] = useState("");
   const [resultado, setResultado] = useState("");
+  const [display, setDisplay] = useState("")
+  const [arvore, setArvore] = useState(null);
 
   const handleButtonClick = (value) => {
     setExpressao((prev) => prev + value);
@@ -15,6 +17,8 @@ function App() {
   const clearDisplay = () => {
     setExpressao("");
     setResultado("");
+    setDisplay("");
+    setArvore(null);
   }
 
   async function calculateResult() {
@@ -28,8 +32,13 @@ function App() {
       const data = await response.json();
 
       if (response.ok) {
-        setResultado(data.result);
-        setExpressao(data.result)
+
+
+        setResultado(`(${data.result})`);
+        setDisplay(`(${data.result})`)
+        setArvore(data.tree);
+        console.log(data.result);
+
       } else {
         setResultado("Erro: " + data.error);
       }
@@ -46,6 +55,7 @@ function App() {
 
         <Calculadora
           expressao={expressao}
+          display={display}
           handleButtonClick={handleButtonClick}
           clearDisplay={clearDisplay}
           calculateResult={calculateResult}
@@ -55,7 +65,10 @@ function App() {
           <h4>Calculadora de Números Complexos</h4>
 
           {resultado !== "" && (
-            <ResultDisplay resultado={resultado} />
+            <ResultDisplay
+              resultado={resultado}
+              arvore={arvore}
+            />
           )}
         </div>
 

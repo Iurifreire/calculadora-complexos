@@ -14,10 +14,11 @@ body {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  margin-top: 20px;
-  height: 90vh;
-  width: 95%;
-  color: white;
+  height: 98vh;
+  width: 100%;
+  background-image: url("assets/background3.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .calculator-container {
@@ -29,6 +30,7 @@ body {
   gap: 3rem;
   flex-wrap: wrap;
   padding: 1rem;
+  margin-top: 25px;
   min-width: 0;
   min-inline-size: 0;
 

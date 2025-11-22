@@ -1,0 +1,56 @@
+.tree-page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+    width: 100vw;
+    background-color: #778da9;
+}
+
+
+.tree-page-container h2 {
+    font-family: "Science Gothic", sans-serif !important;
+    letter-spacing: 2px;
+    font-size: 1.4rem;
+    font-weight: bold;
+    font-variation-settings:
+        "slnt" 0,
+        "wdth" 100;
+}
+
+.tree-container {
+    box-shadow:
+        12px 12px 16px 0 rgba(255, 255, 255, 0.3) inset,
+        -8px -8px 12px 0 rgba(0, 0, 0, .25) inset;
+
+    background-color: #ffffff;
+
+    padding: 10px 10px 10px 10px;
+    align-items: center;
+    border-radius: 50px;
+    display: flex;
+    height: 70%;
+    justify-self: center;
+    width: 70%;
+}
+
+
+button.back-btn {
+    background-color: #000;
+    border: none;
+    height: 50px;
+    width: 80px;
+    border-radius: 50px;
+    box-shadow: 4px 4px 6px 0 rgba(255, 255, 255, 0.3) inset,
+        -4px -4px 6px 0 rgba(0, 0, 0, .25) inset;
+    color: #63ff47;
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    transition: background-color 0.3s, color 0.3s;
+}
