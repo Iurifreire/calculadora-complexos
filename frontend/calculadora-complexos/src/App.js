@@ -33,8 +33,8 @@ function App() {
 
       if (response.ok) {
 
-
-        setResultado(`(${data.result})`);
+        // setResultado pra notação LISP:
+        setResultado(data.lisp_notation);
         setDisplay(`(${data.result})`)
         setArvore(data.tree);
         console.log(data.result);

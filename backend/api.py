@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from calculations.format import format_token, rpn
+from calculations.format import format_token, rpn, format_lisp
 from calculations.binnary_tree import build_tree, serialize, evaluate
 from calculations.complex_numbers import format_entry
 
@@ -39,11 +39,15 @@ def calculate():
         print("Formatado:", formated)
         print("=======================")
 
+        # Adicionando a notação LISP:
+        lisp_notation = format_lisp(tokens)
+
         return jsonify({
             "tokens":tokens,
             "postfix": rpn_tokens,
             "tree": serialize(tree),
-            "result": formated
+            "result": formated,
+            "lisp_notation": lisp_notation
         })
 
     except Exception as e:
