@@ -2,7 +2,7 @@ import re
 from calculations.binnary_tree import build_tree
 
 def format_token(expression):
-    expression = expression.replace(" ", "")
+    expression = expression.replace(" ", "").replace("√", "sqrt")
 
     
     token_pattern = re.compile(
@@ -135,8 +135,8 @@ def tree_to_lisp(node):
             return f"-{operand}"
         
         elif node.value == "sqrt":
-            # Preciso dar uma olhada melhor na raiz quadrada....
-            return f"(v {operand})"
+            # √a -> (sqrt a)
+            return f"(sqrt {operand})"
         
         elif node.value == "sen":
             # sen a
