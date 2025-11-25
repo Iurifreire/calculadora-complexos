@@ -53,6 +53,9 @@ def tan(a):
     res = cmath.tan(c)
     return complex_expression(res.real, res.imag)
 
+def conjugate(a):
+    return complex_expression(a["real"], -a["imag"])
+
 
 def format_entry(expression):
     real = expression["real"]

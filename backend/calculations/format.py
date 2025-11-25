@@ -2,14 +2,14 @@ import re
 from calculations.binnary_tree import build_tree
 
 def format_token(expression):
-    expression = expression.replace(" ", "").replace("√", "sqrt")
+    expression = expression.replace(" ", "").replace("z̄", "conj").replace("√", "sqrt")
 
     
     token_pattern = re.compile(
         r'''
         (\d+i)|                
         (\d+)|                  
-        (sen|cos|tan|sqrt)|     
+        (sen|cos|tan|sqrt|conj)|     
         ([+\-*/^()])           
         ''',
         re.VERBOSE
@@ -29,7 +29,7 @@ def format_token(expression):
 def rpn(tokens):
     priority = {
         "u+": 5, "u-": 5,
-        "sen": 4, "cos": 4, "tan": 4, "sqrt": 4,
+        "sen": 4, "cos": 4, "tan": 4, "sqrt": 4, "conj": 4,
         "^": 3,
         "*": 2, "/": 2,
         "+": 1, "-": 1
@@ -121,7 +121,7 @@ def tree_to_lisp(node):
     
 
     # *SEGUNDO*, formatando os operadores unários, aquelas que só utilizam um operando:
-    if node.value in ("u+", "u-", "sqrt", "sen", "cos", "tan"):
+    if node.value in ("u+", "u-", "sqrt", "sen", "cos", "tan", "conj"):
         # Formata o operando, que deve ser o nó na esquerda na árvore binária:
         operand = tree_to_lisp(node.left)
 
@@ -147,6 +147,9 @@ def tree_to_lisp(node):
         elif node.value == "tan":
             # tan a
             return f"(tan {operand})"
+        
+        elif node.value == "conj":
+            return f"(conj {operand})"
     
     # *TERCEIRO*, formatando os operadores binários:
     if node.value in ("+", "-", "*", "/", "^"):

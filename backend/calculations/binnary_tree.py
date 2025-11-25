@@ -1,7 +1,7 @@
 import re
 from calculations.complex_numbers import (
     add, sub, mul, div, pot, sqrt,
-    sin, cos, tan, complex_expression)
+    sin, cos, tan, conjugate, complex_expression)
 
 
 class Node:
@@ -34,7 +34,7 @@ def build_tree(tokens):
             stack.append(Node("number", complex_expression(int(token), 0)))
 
 
-        elif token in ("sqrt", "√", "sen", "cos", "tan"):
+        elif token in ("sqrt", "√", "sen", "cos", "tan", "conj"):
             val = stack.pop()
             stack.append(Node("op", token, val, None))
 
@@ -89,6 +89,9 @@ def evaluate(node):
         return cos(evaluate(node.left))
     if node.value == "tan":
         return tan(evaluate(node.left))
+    
+    if node.value == "conj":
+        return conjugate(evaluate(node.left))
 
     left = evaluate(node.left)
     right = evaluate(node.right)
