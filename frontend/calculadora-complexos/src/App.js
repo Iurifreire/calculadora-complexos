@@ -1,14 +1,18 @@
 import './App.css';
 import Calculadora from './components/Calculator/Calculator';
 import ResultDisplay from './components/ResultDisplay/ResultDisplay';
+import VerifyLispModal from './components/VerifyLispModal/VerifyLispModal';
 import { useState } from 'react';
 
 function App() {
 
   const [expressao, setExpressao] = useState("");
-  const [resultado, setResultado] = useState("");
+  const [notacaoLisp, setNotacaoLisp] = useState("");
+  const [notacaoLisp2, setNotacaoLisp2] = useState("");
   const [display, setDisplay] = useState("")
   const [arvore, setArvore] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const [closed, setClosed] = useState(true);
 
   const handleButtonClick = (value) => {
     setExpressao((prev) => prev + value);
@@ -16,10 +20,15 @@ function App() {
 
   const clearDisplay = () => {
     setExpressao("");
-    setResultado("");
     setDisplay("");
     setArvore(null);
   }
+
+  const clearLispNotation = () => {
+      setNotacaoLisp("");
+      setNotacaoLisp2("");
+  }
+
 
   async function calculateResult() {
     try {
@@ -34,17 +43,26 @@ function App() {
       if (response.ok) {
 
         // setResultado pra notação LISP:
-        setResultado(data.lisp_notation);
+
+        if (!notacaoLisp) {
+            setNotacaoLisp(data.lisp_notation);
+        } else {
+            setNotacaoLisp2(data.lisp_notation)
+        }
+
+
+        
+        
         setDisplay(`(${data.result})`)
         setArvore(data.tree);
         console.log(data.result);
 
       } else {
-        setResultado("Erro: " + data.error);
+        setNotacaoLisp("Erro: " + data.error);
       }
 
     } catch (error) {
-      setResultado("Erro na conexão com o servidor.");
+      setNotacaoLisp("Erro na conexão com o servidor.");
     }
   }
 
@@ -61,12 +79,25 @@ function App() {
           calculateResult={calculateResult}
         />
 
+        {isOpen && (
+        <VerifyLispModal
+        onClose={() => setIsOpen(false)}
+        notacaoLisp={notacaoLisp}
+        notacaoLisp2={notacaoLisp2}
+        />
+)}
+
+
+
         <div className='calc-result-info'>
           <h4>Calculadora de Números Complexos</h4>
 
-          {resultado !== "" && (
+          {(notacaoLisp !== "" || notacaoLisp2 !== "")  && (
             <ResultDisplay
-              resultado={resultado}
+              notacaoLisp={notacaoLisp}
+              notacaoLisp2={notacaoLisp2}
+              clearLispNotation={clearLispNotation}
+              setIsOpen={setIsOpen}
               arvore={arvore}
             />
           )}

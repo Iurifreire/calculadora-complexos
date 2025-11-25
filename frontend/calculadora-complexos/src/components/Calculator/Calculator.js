@@ -55,6 +55,11 @@ export default function Calculadora({ expressao, handleButtonClick, clearDisplay
                         <button className="num-btn" onClick={() => handleButtonClick("9")} data-number>9</button>
                         <button className="op-btn" onClick={() => handleButtonClick("√")} data-number>√</button>
                         <button className="op-btn" onClick={() => handleButtonClick("^")} data-number>^</button>
+                        <button className="variable" onClick={() => handleButtonClick("a")} data-number><img src="/icons/letter-a.png" alt="a"/></button>
+                        <button className="variable" onClick={() => handleButtonClick("b")} data-number><img src="/icons/letter-b.png" alt="b"/></button>
+                        <button className="variable" onClick={() => handleButtonClick("c")} data-number><img src="/icons/letter-c.png" alt="c"/></button>
+                        <button className="variable" onClick={() => handleButtonClick("d")} data-number><img src="/icons/letter-d.png" alt="d"/></button>
+                        <button className="conj" onClick={() => handleButtonClick("z̄")} data-number> <span className="conj-text">z̄</span></button>
                         <button className="function" onClick={() => handleButtonClick("sen")} data-number>sen</button>
                         <button className="function" onClick={() => handleButtonClick("cos")} data-number>cos</button>
                         <button className="function" onClick={() => handleButtonClick("tan")} data-number>tan</button>

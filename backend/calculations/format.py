@@ -7,7 +7,7 @@ def format_token(expression):
     
     token_pattern = re.compile(
         r'''
-        (\d+i)|                 
+        (\d+i)|                
         (\d+)|                  
         (sen|cos|tan|sqrt)|     
         ([+\-*/^()])           

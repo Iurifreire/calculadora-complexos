@@ -40,7 +40,10 @@ def calculate():
         print("=======================")
 
         # Adicionando a notação LISP:
+        print("== NOTAÇÃO LISP ==")
         lisp_notation = format_lisp(tokens)
+
+        print(lisp_notation)
 
         return jsonify({
             "tokens":tokens,

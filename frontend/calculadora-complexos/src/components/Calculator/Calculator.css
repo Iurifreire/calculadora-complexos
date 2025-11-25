@@ -1,7 +1,8 @@
 .calculator-wrapper {
     position: relative;
-    padding: 20px;
+    padding: 10px;
     border-radius: 40px;
+    margin-bottom: 12px;
     background: rgba(15, 15, 15, 0.75);
     backdrop-filter: blur(20px);
     box-shadow:
@@ -11,7 +12,7 @@
         inset 0 -6px 12px rgba(0, 0, 0, 0.5);
     width: clamp(280px, 45vw, 520px);
     min-width: 220px;
-    height: 95%;
+    height: 100%;
     flex: 0 0 auto;
     min-inline-size: 0;
 }
@@ -125,12 +126,12 @@
     justify-content: center;
     align-items: center;
     width: 90%;
-    height: 85%;
-    margin-top: 20px;
-    padding-bottom: 20px;
+    height: 72%;
+    margin-top: 15px;
+    padding-bottom: 15px;
     background: #0d0d0d;
     border-radius: 22px;
-    padding: 22px;
+    padding: 18px;
     box-sizing: border-box;
     box-shadow:
         inset -6px -6px 14px rgba(0, 0, 0, 0.85),
@@ -152,11 +153,12 @@
 
 .buttons-grid {
     display: grid;
+    margin-bottom: 75px;
     grid-template-columns: repeat(5, minmax(40px, 1fr));
     grid-template-rows: repeat(5, minmax(42px, 1fr));
     gap: 14px;
     width: 100%;
-    height: 90%;
+    height: 70%;
 }
 
 button {
@@ -425,4 +427,161 @@ button.function::before {
     background: linear-gradient(to bottom, #183a37, #04EFFF);
     z-index: -1;
     border-radius: inherit;
+}
+
+.variable img {
+width: 30px;
+height: 30px;
+
+}
+
+button.variable {
+    background: linear-gradient(135deg,
+            #ffffff 0%,
+            #d9d9d9 50%,
+            #bfbfbf 100%);
+    border: 1px solid #8a8a8a;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    box-shadow:
+        inset 2px 2px 4px rgba(255, 255, 255, 0.35),
+        inset -2px -2px 6px rgba(0, 0, 0, 0.25),
+        3px 3px 6px rgba(0, 0, 0, 0.4);
+
+    border-radius: 10px;
+
+    position: relative;
+    overflow: hidden;
+}
+
+button.variable:active {
+    background: linear-gradient(135deg,
+            #cfcfcf 0%,
+            #bfbfbf 50%,
+            #9f9f9f 100%);
+    transform: translateY(2px) scale(0.98);
+
+    box-shadow:
+        inset 3px 3px 6px rgba(255, 255, 255, 0.25),
+        inset -3px -3px 10px rgba(0, 0, 0, 0.35),
+        1px 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+button.variable::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(to bottom,
+            #f7f7f7,
+            #cccccc);
+    z-index: -1;
+    border-radius: inherit;
+}
+
+/* BOTÃO BASE */
+button.conj {
+    position: relative;
+    padding: 0.5rem 1.2rem;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.15);
+
+    background: linear-gradient(
+        135deg,
+        rgba(0, 8, 20, 0.14),
+        rgba(0, 8, 20, 0.45)
+    );
+
+    box-shadow:
+        inset 2px 2px 4px rgba(255, 255, 255, 0.08),
+        inset -2px -2px 5px rgba(0, 0, 0, 0.45),
+        0 0 10px rgba(255, 255, 255, 0.06);
+
+    cursor: pointer;
+    backdrop-filter: blur(2px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: 0.25s ease;
+    overflow: hidden;
+}
+
+
+/* TEXTO ARCO-ÍRIS */
+button.conj .conj-text {
+    font-size: 35px;
+    font-style: italic;
+    font-weight: bold;
+
+    background: linear-gradient(
+        45deg,
+        red,
+        orange,
+        yellow,
+        green,
+        cyan,
+        blue,
+        violet
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+
+/* BORDA NEON ARCO-ÍRIS */
+button.conj::before {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    border-radius: inherit;
+
+    background: linear-gradient(
+        120deg,
+        red,
+        orange,
+        yellow,
+        green,
+        cyan,
+        blue,
+        violet,
+        red
+    );
+    opacity: 0.35;
+
+    filter: blur(6px);
+    z-index: -1;
+
+    transition: 0.25s ease;
+}
+
+
+/* HOVER → neon mais forte + brilho */
+button.conj:hover::before {
+    opacity: 0.75;
+    filter: blur(8px);
+}
+
+button.conj:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 0 15px rgba(255, 255, 255, 0.12),
+        0 0 25px rgba(255, 255, 255, 0.08);
+}
+
+
+/* ACTIVE → profundidade e brilho mais concentrado */
+button.conj:active {
+    transform: translateY(2px) scale(0.98);
+    box-shadow:
+        inset 2px 2px 6px rgba(255,255,255,0.05),
+        inset -2px -2px 8px rgba(0,0,0,0.6);
+}
+
+button.conj:active::before {
+    opacity: 0.95;
+    filter: blur(5px);
 }

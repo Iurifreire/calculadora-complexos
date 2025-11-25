@@ -95,6 +95,22 @@
     scrollbar-color: #00ff55 #001900;
 }
 
+.notation-lisp h3:empty::before {
+    content: "Nenhuma notação disponível…";
+    color: #999;
+    font-style: italic;
+}
+
+.buttons-result-container .disabled-btn {
+    opacity: 0.5;
+    pointer-events: none; /* desativa o clique */
+    cursor: not-allowed;
+    background-color: #999;
+}
+
+
+
+
 @media (max-width: 950px) {
     .calculator-container {
         gap: 1rem;
