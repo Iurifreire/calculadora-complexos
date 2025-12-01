@@ -7,20 +7,22 @@ def complex_expression(real, imag):
 
 
 def add(a, b):
-    return complex_expression(a["real"] + b["real"], a["imag"] + b["imag"])
+    return complex_expression(float(a["real"]) + float(b["real"]), 
+                             float(a["imag"]) + float(b["imag"]))
 
 def sub(a, b):
-    return complex_expression(a["real"] - b["real"], a["imag"] - b["imag"])
+    return complex_expression(float(a["real"]) - float(b["real"]), 
+                             float(a["imag"]) - float(b["imag"]))
 
 def mul(a, b):
-    real = a["real"] * b["real"] - a["imag"] * b["imag"]
-    imag = a["real"] * b["imag"] + a["imag"] * b["real"]
+    real = float(a["real"]) * float(b["real"]) - float(a["imag"]) * float(b["imag"])
+    imag = float(a["real"]) * float(b["imag"]) + float(a["imag"]) * float(b["real"])
     return complex_expression(real, imag)
 
 def div(a, b):
-    denom = b["real"]**2 + b["imag"]**2
-    real = (a["real"] * b["real"] + a["imag"] * b["imag"]) / denom
-    imag = (a["imag"] * b["real"] - a["real"] * b["imag"]) / denom
+    denom = float(b["real"]**2 + b["imag"]**2)
+    real = float(a["real"] * b["real"] + a["imag"] * b["imag"]) / denom
+    imag = float(a["imag"] * b["real"] - a["real"] * b["imag"]) / denom
     return complex_expression(real, imag)
 
 
@@ -61,8 +63,8 @@ def format_entry(expression):
     real = expression["real"]
     imag = expression["imag"]
 
-    real = round(real, 2)
-    imag = round(imag, 2)
+    real = round(real, 4)
+    imag = round(imag, 4)
 
     if imag == 0:
         return str(real)
