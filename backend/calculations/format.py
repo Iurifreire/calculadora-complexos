@@ -78,8 +78,10 @@ def rpn(tokens):
     prev = None
 
     for token in tokens:
+        if re.fullmatch(r"[a-d]", token):
+            output.append(token)
 
-        if re.fullmatch(r"\d+", token) or re.fullmatch(r"\d+i", token):
+        elif re.fullmatch(r"\d+", token) or re.fullmatch(r"\d+i", token):
             output.append(token)
 
         elif token in priority:
