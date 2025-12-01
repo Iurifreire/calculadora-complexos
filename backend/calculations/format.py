@@ -7,7 +7,8 @@ def format_token(expression):
     
     token_pattern = re.compile(
         r'''
-        (\d+i|i)|          
+        (\d+i)|
+        (i\d*)|          
         (\d+)| 
         (sen|cos|tan|sqrt|conj)|  
         ([a-d])|                    
@@ -22,8 +23,9 @@ def format_token(expression):
     for group in matches:
         for item in group:
             if item != "":
-                
-                if item == "i":
+                if item.startswith('i') and len(item) > 1 and item[1:].isdigit():
+                    tokens.append(item[1:] + 'i')  # Converte ix em xi, evitando erros.
+                elif item == "i":
                     tokens.append("1i")
                 elif re.fullmatch(r"\d+i", item):  
                     tokens.append(item)
