@@ -66,6 +66,10 @@ def build_tree(tokens):
                stack.append(Node("op", "/", left, right))
             elif token == "^":
                stack.append(Node("op", "^", left, right))
+               
+        elif re.fullmatch(r"[a-d]", token):
+            stack.append(Node("variable", token))
+    
 
     return stack[0]
 

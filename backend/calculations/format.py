@@ -7,8 +7,9 @@ def format_token(expression):
     
     token_pattern = re.compile(
         r'''
-        (\d+i)|                
-        (\d+)|                  
+        (\d+i|i)|          
+        (\d+)| 
+        ([a-d])|                 
         (sen|cos|tan|sqrt|conj)|     
         ([+\-*/^()])           
         ''',
@@ -21,9 +22,42 @@ def format_token(expression):
     for group in matches:
         for item in group:
             if item != "":
-                tokens.append(item)
+                
+                if item == "i":
+                    tokens.append("1i")
+                elif re.fullmatch(r"\d+i", item):  
+                    tokens.append(item)
+                else:
+                    tokens.append(item)
+
+    tokens = implicit_multi(tokens)
 
     return tokens
+
+
+def implicit_multi(tokens):
+    
+    def need_mult(a, b):
+        if a == ")" and (b == "(" or b.isdigit() or b.isalpha()):
+            return True
+        if a.isdigit() and b.isalpha():
+            return True
+       
+        if a in ("sen", "cos", "tan", "sqrt", "conj") and (b.isdigit() or b.isalpha()):
+            return True
+        return False
+
+    saida = []
+    for i in range(len(tokens)):
+        if i > 0:
+            if need_mult(tokens[i - 1], tokens[i]):
+                saida.append("*")
+
+        saida.append(tokens[i])
+
+    return saida
+
+
 
 
 def rpn(tokens):
@@ -159,3 +193,6 @@ def tree_to_lisp(node):
 
         # A aplicação é a mesma para todos os operadores, a + b -> (+ a b):
         return f"({node.value} {left} {right})"
+    
+    if node.type == "variable":
+        return node.value
