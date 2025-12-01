@@ -63,7 +63,7 @@ function App() {
       .replace(/z̄/g, "conj")
       .replace(/√/g, "sqrt");
 
-    const tokenPattern = /(\d+(\.\d+)?i)|(i)|(\d+(\.\d+)?)|([a-d])|(sen|cos|tan|sqrt|conj)|([+\-*/^()])/g;
+    const tokenPattern = /(\d+(\.\d+)?i)|(i)|(\d+(\.\d+)?)|(sen|cos|tan|sqrt|conj)|([a-d])|([+\-*/^()])/g;
     const tokens = [...expression.matchAll(tokenPattern)].map(m => m[0]);
 
     return tokens.map(token => token === "i" ? "1i" : token);

@@ -9,8 +9,8 @@ def format_token(expression):
         r'''
         (\d+i|i)|          
         (\d+)| 
-        ([a-d])|                 
-        (sen|cos|tan|sqrt|conj)|     
+        (sen|cos|tan|sqrt|conj)|  
+        ([a-d])|                    
         ([+\-*/^()])           
         ''',
         re.VERBOSE
