@@ -7,20 +7,22 @@ def complex_expression(real, imag):
 
 
 def add(a, b):
-    return complex_expression(a["real"] + b["real"], a["imag"] + b["imag"])
+    return complex_expression(float(a["real"]) + float(b["real"]), 
+                             float(a["imag"]) + float(b["imag"]))
 
 def sub(a, b):
-    return complex_expression(a["real"] - b["real"], a["imag"] - b["imag"])
+    return complex_expression(float(a["real"]) - float(b["real"]), 
+                             float(a["imag"]) - float(b["imag"]))
 
 def mul(a, b):
-    real = a["real"] * b["real"] - a["imag"] * b["imag"]
-    imag = a["real"] * b["imag"] + a["imag"] * b["real"]
+    real = float(a["real"]) * float(b["real"]) - float(a["imag"]) * float(b["imag"])
+    imag = float(a["real"]) * float(b["imag"]) + float(a["imag"]) * float(b["real"])
     return complex_expression(real, imag)
 
 def div(a, b):
-    denom = b["real"]**2 + b["imag"]**2
-    real = (a["real"] * b["real"] + a["imag"] * b["imag"]) / denom
-    imag = (a["imag"] * b["real"] - a["real"] * b["imag"]) / denom
+    denom = float(b["real"]**2 + b["imag"]**2)
+    real = float(a["real"] * b["real"] + a["imag"] * b["imag"]) / denom
+    imag = float(a["imag"] * b["real"] - a["real"] * b["imag"]) / denom
     return complex_expression(real, imag)
 
 
@@ -39,19 +41,19 @@ def sqrt(a):
 
 
 def sin(a):
-    c = complex(a["real"], a["imag"])
-    res = cmath.sin(c)
-    return complex_expression(res.real, res.imag)
+    # sin(a+ib) = sin(a)cosh(b) + i cos(a)sinh(b)
+    real = math.sin(a["real"]) * math.cosh(a["imag"])
+    imag = math.cos(a["real"]) * math.sinh(a["imag"])
+    return complex_expression(real, imag)
 
 def cos(a):
-    c = complex(a["real"], a["imag"])
-    res = cmath.cos(c)
-    return complex_expression(res.real, res.imag)
+    # cos(a+ib) = cos(a)cosh(b) - i sin(a)sinh(b)
+    real = math.cos(a["real"]) * math.cosh(a["imag"])
+    imag = -math.sin(a["real"]) * math.sinh(a["imag"])
+    return complex_expression(real, imag)
 
 def tan(a):
-    c = complex(a["real"], a["imag"])
-    res = cmath.tan(c)
-    return complex_expression(res.real, res.imag)
+    return div(sin(a), cos(a))
 
 def conjugate(a):
     return complex_expression(a["real"], -a["imag"])
@@ -61,8 +63,8 @@ def format_entry(expression):
     real = expression["real"]
     imag = expression["imag"]
 
-    real = round(real, 2)
-    imag = round(imag, 2)
+    real = round(real, 4)
+    imag = round(imag, 4)
 
     if imag == 0:
         return str(real)

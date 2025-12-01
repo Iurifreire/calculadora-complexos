@@ -7,10 +7,11 @@ def format_token(expression):
     
     token_pattern = re.compile(
         r'''
-        (\d+i|i)|          
+        (\d+i)|
+        (i\d*)|          
         (\d+)| 
-        ([a-d])|                 
-        (sen|cos|tan|sqrt|conj)|     
+        (sen|cos|tan|sqrt|conj)|  
+        ([a-d])|                    
         ([+\-*/^()])           
         ''',
         re.VERBOSE
@@ -22,8 +23,9 @@ def format_token(expression):
     for group in matches:
         for item in group:
             if item != "":
-                
-                if item == "i":
+                if item.startswith('i') and len(item) > 1 and item[1:].isdigit():
+                    tokens.append(item[1:] + 'i')  # Converte ix em xi, evitando erros.
+                elif item == "i":
                     tokens.append("1i")
                 elif re.fullmatch(r"\d+i", item):  
                     tokens.append(item)
@@ -78,8 +80,10 @@ def rpn(tokens):
     prev = None
 
     for token in tokens:
+        if re.fullmatch(r"[a-d]", token):
+            output.append(token)
 
-        if re.fullmatch(r"\d+", token) or re.fullmatch(r"\d+i", token):
+        elif re.fullmatch(r"\d+", token) or re.fullmatch(r"\d+i", token):
             output.append(token)
 
         elif token in priority:
