@@ -39,19 +39,19 @@ def sqrt(a):
 
 
 def sin(a):
-    c = complex(a["real"], a["imag"])
-    res = cmath.sin(c)
-    return complex_expression(res.real, res.imag)
+    # sin(a+ib) = sin(a)cosh(b) + i cos(a)sinh(b)
+    real = math.sin(a["real"]) * math.cosh(a["imag"])
+    imag = math.cos(a["real"]) * math.sinh(a["imag"])
+    return complex_expression(real, imag)
 
 def cos(a):
-    c = complex(a["real"], a["imag"])
-    res = cmath.cos(c)
-    return complex_expression(res.real, res.imag)
+    # cos(x+iy) = cos(x)cosh(y) - i sin(x)sinh(y)
+    real = math.cos(a["real"]) * math.cosh(a["imag"])
+    imag = -math.sin(a["real"]) * math.sinh(a["imag"])
+    return complex_expression(real, imag)
 
 def tan(a):
-    c = complex(a["real"], a["imag"])
-    res = cmath.tan(c)
-    return complex_expression(res.real, res.imag)
+    return div(sin(a), cos(a))
 
 def conjugate(a):
     return complex_expression(a["real"], -a["imag"])
