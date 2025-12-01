@@ -51,8 +51,13 @@ export default function VariableInputModal({ onClose, onConfirm, tokens, clearVa
                             <input
                                 placeholder={`${variavel}`}
                                 type='number'
+                                step="1"
+                                inputMode='numeric'
                                 value={valores[variavel] || ""}
-                                onChange={(e) => updateValue(variavel, e.target.value)}
+                                onChange={(e) => {
+                                    const inteiro = Math.trunc(Number(e.target.value));
+                                    updateValue(variavel, inteiro);
+                                }}
                             />
                         </div>
                     ))}

@@ -99,9 +99,16 @@
     outline: none;
     caret-color: transparent;
     white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
     scrollbar-width: none;
+    white-space: nowrap;
     cursor: default;
     animation: softPulse 3.5s infinite ease-in-out;
+}
+
+.calculator-input::-webkit-scrollbar {
+    display: none;
 }
 
 @keyframes softPulse {
