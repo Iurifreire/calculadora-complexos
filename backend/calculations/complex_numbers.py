@@ -45,7 +45,7 @@ def sin(a):
     return complex_expression(real, imag)
 
 def cos(a):
-    # cos(x+iy) = cos(x)cosh(y) - i sin(x)sinh(y)
+    # cos(a+ib) = cos(a)cosh(b) - i sin(a)sinh(b)
     real = math.cos(a["real"]) * math.cosh(a["imag"])
     imag = -math.sin(a["real"]) * math.sinh(a["imag"])
     return complex_expression(real, imag)
