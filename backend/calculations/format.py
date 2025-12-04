@@ -24,7 +24,7 @@ def format_token(expression):
         for item in group:
             if item != "":
                 if item.startswith('i') and len(item) > 1 and item[1:].isdigit():
-                    tokens.append(item[1:] + 'i')  # Converte ix em xi, evitando erros.
+                    tokens.append(item[1:] + 'i')  
                 elif item == "i":
                     tokens.append("1i")
                 elif re.fullmatch(r"\d+i", item):  

@@ -50,12 +50,12 @@ export default function VariableInputModal({ onClose, onConfirm, tokens, clearVa
                             <label style={{ display: 'block', marginBottom: 6, marginRight: 10 }}>{`${variavel.toUpperCase()}=`}</label>
                             <input
                                 placeholder={`${variavel}`}
-                                type='tel'
-                                pattern="[0-9\-]*"
+                                type='text'
+                                pattern="[0-9+\-*/^() (i)]*"
                                 value={valores[variavel] || ""}
                                 onChange={(e) => {
                                     const val = e.target.value;
-                                    if (/^[-0-9]*$/.test(val)) {
+                                    if (/^[0-9+\-*/^() (i)]*$/.test(val)) {
                                         setValores(prev => ({ ...prev, [variavel]: val }));
                                     }
                                 }}
